@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Papa, { ParseResult } from 'papaparse'
+import { useCsv } from '@/hooks/useCsv'
 
 interface RunEntry {
   date: string
@@ -10,16 +11,20 @@ interface RunEntry {
 }
 
 const CsvUploader: React.FC = () => {
+  const { setcsvData } = useCsv()
+  
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const csvFile = e.target.files?.[0]
 
     try {
       if (csvFile) {
-        const parsedCSVData = Papa.parse<RunEntry>(csvFile, {
+        Papa.parse<RunEntry>(csvFile, {
           header: true, 
           skipEmptyLines: true,
           complete: (results: ParseResult<RunEntry>) => {
             console.log('Parsed CSV Data:', results.data)
+            // add the results.data to context
+            setcsvData(results.data)
           },
           error: (error: Error) => {
             console.error('Error parsing CSV file:', error.message)

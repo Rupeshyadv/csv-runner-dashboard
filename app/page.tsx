@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+
 import CsvUploader from '@/components/CsvUploader'
 
 function page() {
@@ -8,7 +9,7 @@ function page() {
         <div
           className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-center mb-50"
         >
-          <h1 className="text-3xl font-bold text-white">CSV Runner Dashboard</h1>
+          <h1 className="text-7xl font-bold text-white">CSV Runner Dashboard</h1>
         </div>
 
         <div
