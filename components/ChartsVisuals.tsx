@@ -12,6 +12,7 @@ import {
 } from "recharts"
 import { useCsv } from "@/hooks/useCsv"
 import { useRouter } from "next/navigation"
+import PersonChart from "./PersonChart"
 
 interface PersonStats {
   person: string
@@ -106,6 +107,9 @@ export default function ChartsVisuals() {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
+
+                {/* Person chart */}
+                <PersonChart />
             </div>
         </>
     )
