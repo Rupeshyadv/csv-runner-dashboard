@@ -62,18 +62,20 @@ export default function ChartsVisuals() {
 
     return (
         <>
-            <div className="flex items-center justify-end p-1 bg-[#000000] text-white shadow-md space-x-4">
+            <div 
+                className="flex items-center justify-end p-1 bg-[#000000] text-white shadow-md space-x-4"
+            >
                     <button
                         className="bg-linear-to-r from-blue-500 to-purple-600 text-white text-sm px-3 py-2 rounded-lg ml-2 cursor-pointer mt-3.5 mr-3.5"
                         onClick={() => router.push('/csv')}
-                        >
+                    >
                         View CSV
                     </button>
             </div>
             
             <div
                 className="min-h-screen bg-[#000000] flex flex-col items-center p-8 space-y-8"  
-                >
+            >
                 {/* Per person stats */}
                 <div className="h-[350px] w-full bg-[#000000] p-6 rounded-lg">
                     <h2 className="text-white text-xl font-bold mb-4">Miles Run Per Person</h2>

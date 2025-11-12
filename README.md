@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏃‍♂️ CSV Runner Dashboard
 
-## Getting Started
+A data visualization app built using Next.js 14 (App Router), React, and Recharts.
+It allows users to upload a CSV file containing running records (date, person, milesRun), view the raw data in a table, and explore insights via interactive charts.
 
-First, run the development server:
+## 1. Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    Challenge: Build a CSV-based dashboard to visualize and analyze running data.
+    Goal: Enable users to upload and visualize data showing:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    Overall statistics (average, min, max)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    Per-person stats and total miles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    Date-wise performance trends for each person
 
-## Learn More
+    What I built:
 
-To learn more about Next.js, take a look at the following resources:
+        CSV uploader (using papaparse)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+        Persistent global state via React Context API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+        Dynamic tables (using shadcn/ui)
 
-## Deploy on Vercel
+        Interactive charts (using recharts)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+        responsive UI
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 2. Assumptions
+
+    The uploaded CSV will have exact headers:
+    date, person, milesRun.
+
+    If the CSV has invalid/missing headers or extra columns, an error toast is displayed.
+
+    The date format is consistent (e.g., YYYY-MM-DD).
+
+## 3. Prerequisites
+
+    Node.js: v18 or above
+
+    Package manager: npm
+
+    Framework: Next.js (App Router)
+
+    No database required.
+
+    Optional tools for local dev:
+
+    VS Code
+
+    Prettier / ESLint extensions for formatting
+
+## 5. Run & Verify
+    ### 🔹 Development
+    ```bash
+    npm run dev
+    ```
+
+
+    App runs on http://localhost:3000
+
+    ### 🔹 Steps to Validate
+
+    Start app → upload CSV file (headers: date, person, milesRun).
+
+    ✅ Click View CSV → see raw table of all entries.
+
+    ✅ Click View Charts → see:
+
+    Overall stats (avg/min/max)
+
+    Per-person summary chart
+
+    Select a person → date-wise line chart
+
+    ⚠️ Try uploading invalid CSV (extra/missing headers) → error toast appears.

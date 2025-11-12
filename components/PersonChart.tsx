@@ -28,7 +28,7 @@ export default function PersonChart() {
         }))
     
     return (
-        <div className="bg-[#000000] p-6 rounded-lg w-full h-[400px] text-white">
+        <div className="bg-[#000000] p-6 w-full h-[350px] text-white">
             <h2 className="text-xl font-bold mb-4">Miles Run Over Time (Select Person)</h2>
 
             {/* Person selector */}
