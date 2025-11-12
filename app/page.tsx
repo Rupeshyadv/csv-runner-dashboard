@@ -1,7 +1,6 @@
 "use client"
 
 import CsvUploader from '@/components/CsvUploader'
-import LightRays from '@/components/LightRays'
 
 function page() {
   return (
