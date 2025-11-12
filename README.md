@@ -98,22 +98,22 @@ App will run on **http://localhost:3000**
 ```bash
 src/
  ├── app/
- │    ├── charts/page.tsx       # Charts & analytics
- │    ├── csv/page.tsx          # CSV table view
- │    ├── global.css
- │    ├── page.tsx              # Landing page
- │    ├── layout.tsx
+ │    ├── charts/page.tsx       # Renders charts (overall + per-person)
+ │    ├── csv/page.tsx          # Displays parsed CSV data in table form
+ │    ├── global.css            # Global styles 
+ │    ├── page.tsx              # Landing page (CSV upload entry)
+ │    ├── layout.tsx            # Root layout wrapping app with providers (CsvProvider)
  ├── components/
  │    ├── ui/                   # shadcn/ui components
- │    ├── ChartsVisuals.tsx
- │    ├── CsvUploader.tsx       # Upload + navigation 
- │    ├── PersonChart.tsx
+ │    ├── ChartsVisuals.tsx     # Contains Recharts-based overall + per-person visualizations
+ │    ├── CsvUploader.tsx       # Handles file upload, parsing (PapaParse), and routing
+ │    ├── PersonChart.tsx       # Dynamic line chart for date-wise performance (selected runner)
  ├── context/
  │    └── CsvContext.tsx        # Global context for CSV data
  ├── hooks/
  │    └── useCsv.ts             # Custom hook to access context
  ├── lib/
- │    └── utils.ts              # Helper functions (data aggregation)
+ │    └── utils.ts              # Helper functions
 
 ```
 
@@ -130,7 +130,7 @@ src/
 
 The app follows essential accessibility and design principles:
 
-- ✅ Semantic HTML elements (<table>, <caption>, <th>, <button>)
+- ✅ Semantic HTML elements
 - ✅ dark theme
 - ✅ Keyboard-accessible buttons and file inputs
 - ✅ Consistent spacing using Tailwind (p-6, gap-4, rounded-lg)
