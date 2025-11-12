@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Papa, { ParseResult } from 'papaparse'
 import { useCsv } from '@/hooks/useCsv'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-hot-toast'
 
 interface RunEntry {
   date: string
@@ -12,12 +13,12 @@ interface RunEntry {
 }
 
 const CsvUploader: React.FC = () => {
-  const { setcsvData } = useCsv()
+  const { csvData, setcsvData } = useCsv()
   const [isCSVLoaded, setIsCSVLoaded] = useState(false)
   const router = useRouter()
   
   // parses csv and updates context
-  const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCsvUpload =  (e: React.ChangeEvent<HTMLInputElement>) => {
     const csvFile = e.target.files?.[0]
 
     try {
@@ -26,16 +27,46 @@ const CsvUploader: React.FC = () => {
           header: true, 
           skipEmptyLines: true,
           complete: (results: ParseResult<RunEntry>) => {
-            console.log('Parsed CSV Data:', results.data)
-            // add the results.data to context
+            const parsedData = results.data
+
+            // expected headers: date, person, milesRun
+            const expectedHeaders = ['date', 'person', 'milesRun']
+            // user's chosen file headers
+            const fileHeaders = results.meta.fields
+            // validate headers
+            const hasAllHeaders = expectedHeaders.every(header => 
+              fileHeaders?.includes(header)
+            )
+            const extraHeaders = expectedHeaders.some(header => 
+              !fileHeaders?.includes(header)
+            )
+
+            if (!hasAllHeaders || extraHeaders) {
+              toast.error('Invalid CSV format. Please ensure the file has the correct headers: date, person, milesRun.')
+              return
+            }
+
+            // check if rows contain empty fields
+            const hasEmptyFields = parsedData.some(row => 
+              !row.date || !row.person || !row.milesRun
+            )
+
+            if (hasEmptyFields) {
+              toast.error('CSV contains empty fields. Please ensure all rows are complete.')
+              return
+            }
+
+            // Data is valid, now add the results.data to context
             setcsvData(results.data)
+            toast.success('CSV file uploaded successfully!')
+            setIsCSVLoaded(true)
           },
           error: (error: Error) => {
             console.error('Error parsing CSV file:', error.message)
           }
         })
-        setIsCSVLoaded(true)
       }
+
     } catch (error) {
       console.error('Error uploading CSV file:', error)
     }

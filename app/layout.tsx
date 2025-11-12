@@ -2,6 +2,7 @@
 
 import "./globals.css";
 import { CsvProvider } from "@/context/CsvContext";
+import { Toaster } from "react-hot-toast";
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       <body>
         <CsvProvider>
           {children}
+          <Toaster position="top-center"/>
         </CsvProvider>
       </body>
     </html>
